@@ -15,6 +15,9 @@ def predecir_enfermedad(num_sintomas, severidad, duracion):
     if num_sintomas == 0 or severidad == 0:
         resultado = "NO ENFERMO"
 
+    elif severidad >= 8 and duracion >= 365:
+        resultado = "ENFERMEDAD TERMINAL"
+
     elif duracion >= 90:
         resultado = "ENFERMEDAD CRÓNICA"
 
@@ -25,3 +28,4 @@ def predecir_enfermedad(num_sintomas, severidad, duracion):
         resultado = "ENFERMEDAD LEVE"
 
     return resultado
+
