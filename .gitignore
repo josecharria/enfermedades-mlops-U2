@@ -1,0 +1,4 @@
+data/
+predicciones.json
+__pycache__/
+*.pyc
