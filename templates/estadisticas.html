@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estadísticas de predicciones</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            margin: 0;
+            padding: 40px 20px;
+            color: #1e293b;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 14px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+        }
+
+        h1 {
+            text-align: center;
+            color: #087f70;
+        }
+
+        .resumen {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 25px 0;
+        }
+
+        .tarjeta {
+            flex: 1;
+            min-width: 180px;
+            padding: 20px;
+            background: #f1f5f9;
+            border-radius: 9px;
+            text-align: center;
+        }
+
+        .tarjeta strong {
+            display: block;
+            font-size: 25px;
+            color: #087f70;
+            margin-top: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background: #e2e8f0;
+        }
+
+        .boton {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 20px;
+            background: #087f70;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+        }
+
+        .mensaje {
+            text-align: center;
+            color: #64748b;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <h1>Estadísticas de predicciones</h1>
+
+        <div class="resumen">
+            <div class="tarjeta">
+                Total de predicciones
+                <strong>{{ reporte.total_predicciones }}</strong>
+            </div>
+
+            <div class="tarjeta">
+                Última predicción
+                <strong style="font-size: 15px;">
+                    {{ reporte.fecha_ultima_prediccion or "Sin registros" }}
+                </strong>
+            </div>
+        </div>
+
+        <h2>Predicciones por categoría</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Categoría</th>
+                    <th>Cantidad</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for categoria, cantidad in reporte.por_categoria.items() %}
+                <tr>
+                    <td>{{ categoria }}</td>
+                    <td>{{ cantidad }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h2>Últimas 5 predicciones</h2>
+
+        {% if reporte.ultimas_5_predicciones %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Síntomas</th>
+                    <th>Severidad</th>
+                    <th>Duración</th>
+                    <th>Resultado</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for p in reporte.ultimas_5_predicciones %}
+                <tr>
+                    <td>{{ p.fecha }}</td>
+                    <td>{{ p.num_sintomas }}</td>
+                    <td>{{ p.severidad }}</td>
+                    <td>{{ p.duracion }} días</td>
+                    <td>{{ p.prediccion }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p class="mensaje">Todavía no se han realizado predicciones.</p>
+        {% endif %}
+
+        <a href="/" class="boton">Volver a evaluación</a>
+
+    </div>
+</body>
+</html>

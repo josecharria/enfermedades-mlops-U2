@@ -61,20 +61,36 @@
             font-size: 16px;
         }
 
-        button {
+        button, .boton-estadisticas {
+            display: block;
             width: 100%;
             padding: 14px;
-            background: #087f70;
-            color: white;
             border: none;
             border-radius: 7px;
             font-size: 16px;
             font-weight: bold;
+            text-align: center;
+            text-decoration: none;
             cursor: pointer;
+        }
+
+        button {
+            background: #087f70;
+            color: white;
         }
 
         button:hover {
             background: #06665a;
+        }
+
+        .boton-estadisticas {
+            margin-top: 12px;
+            background: #2563eb;
+            color: white;
+        }
+
+        .boton-estadisticas:hover {
+            background: #1d4ed8;
         }
 
         .resultado {
@@ -157,6 +173,10 @@
             </div>
 
             <button type="submit">Evaluar paciente</button>
+
+            <a href="/estadisticas" class="boton-estadisticas">
+                Consultar estadísticas
+            </a>
 
         </form>
 
