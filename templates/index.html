@@ -1,0 +1,184 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación de pacientes</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            margin: 0;
+            padding: 40px 20px;
+            color: #1e293b;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: auto;
+            background: white;
+            padding: 35px;
+            border-radius: 14px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            color: #087f70;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .field {
+            margin-bottom: 22px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #087f70;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #06665a;
+        }
+
+        .resultado {
+            margin-top: 25px;
+            padding: 20px;
+            text-align: center;
+            border-radius: 9px;
+            background: #e0f2fe;
+        }
+
+        .resultado h2 {
+            margin-bottom: 8px;
+            color: #075985;
+        }
+
+        .error {
+            margin-top: 20px;
+            padding: 12px;
+            color: #991b1b;
+            background: #fee2e2;
+            border-radius: 7px;
+        }
+
+        .aviso {
+            margin-top: 25px;
+            text-align: center;
+            font-size: 12px;
+            color: #64748b;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <header>
+            <h1>Evaluación de pacientes</h1>
+            <p>Sistema académico de clasificación de síntomas</p>
+        </header>
+
+        <form action="/evaluar" method="POST">
+
+            <div class="field">
+                <label for="num_sintomas">
+                    Cantidad de síntomas (0 a 10)
+                </label>
+                <input
+                    type="number"
+                    id="num_sintomas"
+                    name="num_sintomas"
+                    min="0"
+                    max="10"
+                    required>
+            </div>
+
+            <div class="field">
+                <label for="severidad">
+                    Severidad de los síntomas (0 a 10)
+                </label>
+                <input
+                    type="number"
+                    id="severidad"
+                    name="severidad"
+                    min="0"
+                    max="10"
+                    required>
+            </div>
+
+            <div class="field">
+                <label for="duracion">
+                    Duración de los síntomas (días)
+                </label>
+                <input
+                    type="number"
+                    id="duracion"
+                    name="duracion"
+                    min="0"
+                    required>
+            </div>
+
+            <button type="submit">Evaluar paciente</button>
+
+        </form>
+
+        {% if resultado %}
+        <div class="resultado">
+            <h2>Resultado de la evaluación</h2>
+            <strong>{{ resultado }}</strong>
+        </div>
+        {% endif %}
+
+        {% if error %}
+        <div class="error">
+            {{ error }}
+        </div>
+        {% endif %}
+
+        <div class="aviso">
+            Esta herramienta es una simulación académica.
+            No constituye un diagnóstico médico ni reemplaza
+            la valoración de un profesional de la salud.
+        </div>
+
+    </div>
+</body>
+</html>
